@@ -9,23 +9,16 @@
             <div class="info-icon">📞</div>
             <div>
               <h3>電話</h3>
-              <p>02-1234-5678</p>
+              <p>0937-832-597</p>
             </div>
           </div>
-          <div class="info-item">
+          <!-- <div class="info-item">
             <div class="info-icon">📧</div>
             <div>
               <h3>電子郵件</h3>
-              <p>info@builder-design.com</p>
+              <p>info@fongying.com.tw</p>
             </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">📍</div>
-            <div>
-              <h3>地址</h3>
-              <p>台北市信義區信義路五段7號</p>
-            </div>
-          </div>
+          </div> -->
           <div class="info-item">
             <div class="info-icon">🕐</div>
             <div>

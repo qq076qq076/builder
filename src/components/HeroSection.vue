@@ -4,7 +4,7 @@
       <div class="container">
         <div class="hero-text">
           <h1 class="hero-title">打造您的理想空間</h1>
-          <p class="hero-subtitle">專業裝潢設計，為您創造舒適美觀的居住環境</p>
+          <p class="hero-subtitle">專業工程與裝潢設計，為您創造舒適美觀的居住環境</p>
           <div class="hero-buttons">
             <a href="#contact" class="btn btn-primary" @click="scrollToContact">立即諮詢</a>
             <a href="#portfolio" class="btn btn-outline" @click="scrollToPortfolio">查看作品</a>

@@ -5,7 +5,7 @@
         <div class="about-text">
           <h2 class="section-title">關於我們</h2>
           <p class="about-description">
-            我們是一支擁有豐富經驗的專業裝潢設計團隊，致力於為客戶打造理想的生活空間。
+            豐盈工程股份有限公司是一支擁有豐富經驗的專業工程與裝潢設計團隊，致力於為客戶打造理想的生活空間。
             從設計規劃到施工完成，我們提供一站式服務，確保每個細節都符合您的期望。
           </p>
           <div class="about-stats">

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="nav-content">
         <div class="logo">
-          <h2>裝潢設計</h2>
+          <h2>豐盈工程</h2>
         </div>
         <ul class="nav-menu" :class="{ 'active': menuOpen }">
           <li><a href="#home" @click="scrollTo('home')">首頁</a></li>

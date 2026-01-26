@@ -3,8 +3,8 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
-          <h3>裝潢設計</h3>
-          <p>專業的裝潢設計團隊，為您打造理想的生活空間。</p>
+          <h3>豐盈工程股份有限公司</h3>
+          <p>專業的工程與裝潢設計團隊，為您打造理想的生活空間。</p>
         </div>
         <div class="footer-section">
           <h4>快速連結</h4>
@@ -18,13 +18,12 @@
         </div>
         <div class="footer-section">
           <h4>聯絡資訊</h4>
-          <p>電話：02-1234-5678</p>
-          <p>郵件：info@builder-design.com</p>
-          <p>地址：台北市信義區信義路五段7號</p>
+          <p>電話：0937832597</p>
+          <p>郵件：info@fongying.com.tw</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 裝潢設計. 版權所有.</p>
+        <p>&copy; 2024 豐盈工程股份有限公司. 版權所有.</p>
       </div>
     </div>
   </footer>

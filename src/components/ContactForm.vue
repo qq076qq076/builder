@@ -1,5 +1,5 @@
 <template>
-  <form class="contact-form" @submit.prevent="handleSubmit">
+  <form class="contact-form" @submit.prevent="handleSubmit" ref="formRef">
     <div class="form-group">
       <label for="name">姓名 *</label>
       <input
@@ -79,6 +79,7 @@ import { ref, reactive } from 'vue'
 export default {
   name: 'ContactForm',
   setup() {
+    const formRef = ref(null)
     const form = reactive({
       name: '',
       phone: '',
@@ -90,6 +91,21 @@ export default {
     const errors = reactive({})
     const isSubmitting = ref(false)
     const submitSuccess = ref(false)
+    
+    // Google Form 設定
+    // 請將此 URL 替換為您的 Google Form 提交 URL
+    // 取得方式：建立 Google Form → 右上角「傳送」→ 複製連結 → 將 /viewform 改為 /formResponse
+    const GOOGLE_FORM_URL = import.meta.env.VITE_GOOGLE_FORM_URL || ''
+    
+    // Google Form 欄位對應（entry.xxxxx 是 Google Form 的欄位 ID）
+    // 取得方式：在表單 URL 後加上 ?usp=pp_url&entry.123456789=test 來測試，數字就是 entry ID
+    const FORM_ENTRIES = {
+      name: import.meta.env.VITE_GOOGLE_FORM_ENTRY_NAME || 'entry.123456789',
+      phone: import.meta.env.VITE_GOOGLE_FORM_ENTRY_PHONE || 'entry.123456790',
+      email: import.meta.env.VITE_GOOGLE_FORM_ENTRY_EMAIL || 'entry.123456791',
+      subject: import.meta.env.VITE_GOOGLE_FORM_ENTRY_SUBJECT || 'entry.123456792',
+      message: import.meta.env.VITE_GOOGLE_FORM_ENTRY_MESSAGE || 'entry.123456793'
+    }
 
     const validateForm = () => {
       // 清除之前的錯誤
@@ -126,6 +142,68 @@ export default {
       return Object.keys(errors).length === 0
     }
 
+    const submitToGoogleForm = () => {
+      return new Promise((resolve, reject) => {
+        if (!GOOGLE_FORM_URL) {
+          reject(new Error('未設定 Google Form URL'))
+          return
+        }
+
+        // 建立隱藏 iframe 來提交表單
+        const iframe = document.createElement('iframe')
+        iframe.style.display = 'none'
+        iframe.name = 'hidden_iframe'
+        document.body.appendChild(iframe)
+
+        // 建立隱藏表單
+        const hiddenForm = document.createElement('form')
+        hiddenForm.method = 'POST'
+        hiddenForm.action = GOOGLE_FORM_URL
+        hiddenForm.target = 'hidden_iframe'
+        hiddenForm.style.display = 'none'
+
+        // 建立表單欄位
+        const fields = [
+          { name: FORM_ENTRIES.name, value: form.name },
+          { name: FORM_ENTRIES.phone, value: form.phone },
+          { name: FORM_ENTRIES.email, value: form.email },
+          { name: FORM_ENTRIES.subject, value: form.subject || '' },
+          { name: FORM_ENTRIES.message, value: form.message }
+        ]
+
+        fields.forEach(field => {
+          const input = document.createElement('input')
+          input.type = 'hidden'
+          input.name = field.name
+          input.value = field.value
+          hiddenForm.appendChild(input)
+        })
+
+        document.body.appendChild(hiddenForm)
+
+        // 監聽 iframe 載入完成
+        iframe.onload = () => {
+          setTimeout(() => {
+            document.body.removeChild(iframe)
+            document.body.removeChild(hiddenForm)
+            resolve()
+          }, 1000)
+        }
+
+        // 提交表單
+        hiddenForm.submit()
+
+        // 設定超時處理
+        setTimeout(() => {
+          if (document.body.contains(iframe)) {
+            document.body.removeChild(iframe)
+            document.body.removeChild(hiddenForm)
+            resolve() // 即使超時也視為成功（Google Forms 可能不會回傳）
+          }
+        }, 3000)
+      })
+    }
+
     const handleSubmit = async () => {
       if (!validateForm()) {
         return
@@ -135,11 +213,14 @@ export default {
       submitSuccess.value = false
 
       try {
-        // 模擬 API 呼叫
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        
-        // 這裡可以實際發送表單資料到後端
-        console.log('表單資料:', form)
+        if (GOOGLE_FORM_URL) {
+          // 提交到 Google Form
+          await submitToGoogleForm()
+        } else {
+          // 如果沒有設定 Google Form URL，使用模擬提交
+          await new Promise(resolve => setTimeout(resolve, 1500))
+          console.log('表單資料:', form)
+        }
         
         submitSuccess.value = true
         
@@ -148,7 +229,7 @@ export default {
           form[key] = ''
         })
 
-        // 3秒後隱藏成功訊息
+        // 5秒後隱藏成功訊息
         setTimeout(() => {
           submitSuccess.value = false
         }, 5000)
@@ -161,6 +242,7 @@ export default {
     }
 
     return {
+      formRef,
       form,
       errors,
       isSubmitting,
