@@ -9,28 +9,15 @@
             <div class="info-icon">📞</div>
             <div>
               <h3>電話</h3>
-              <p>02-1234-5678</p>
+              <p>0937-832597 林老闆</p>
             </div>
           </div>
-          <div class="info-item">
-            <div class="info-icon">📧</div>
-            <div>
-              <h3>電子郵件</h3>
-              <p>info@builder-design.com</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon">📍</div>
-            <div>
-              <h3>地址</h3>
-              <p>台北市信義區信義路五段7號</p>
-            </div>
-          </div>
+
           <div class="info-item">
             <div class="info-icon">🕐</div>
             <div>
               <h3>營業時間</h3>
-              <p>週一至週五 09:00 - 18:00</p>
+              <p>週一至週五 08:00 - 22:00</p>
             </div>
           </div>
         </div>

@@ -1,18 +1,27 @@
 <template>
-  <nav class="navbar" :class="{ 'scrolled': isScrolled }">
+  <nav class="navbar" :class="{ 'scrolled': isScrolled, 'menu-active': menuOpen }">
     <div class="container">
       <div class="nav-content">
-        <div class="logo">
-          <h2>裝潢設計</h2>
+        <!-- Logo 區塊：優化公司名稱顯示 -->
+        <div class="logo" @click="scrollTo('home')">
+          <div class="logo-wrapper">
+            <span class="logo-main">豐盈</span>
+            <span class="logo-sub">室內裝修工程</span>
+          </div>
+          <div class="experience-badge">40年經驗</div>
         </div>
+
+        <!-- 導覽選單 -->
         <ul class="nav-menu" :class="{ 'active': menuOpen }">
-          <li><a href="#home" @click="scrollTo('home')">首頁</a></li>
-          <li><a href="#services" @click="scrollTo('services')">服務項目</a></li>
-          <li><a href="#portfolio" @click="scrollTo('portfolio')">作品展示</a></li>
-          <li><a href="#about" @click="scrollTo('about')">關於我們</a></li>
-          <li><a href="#contact" @click="scrollTo('contact')">聯絡我們</a></li>
+          <li><a href="#home" @click.prevent="scrollTo('home')">首頁</a></li>
+          <li><a href="#services" @click.prevent="scrollTo('services')">服務項目</a></li>
+          <li><a href="#work" @click.prevent="scrollTo('work')">翻新案例</a></li>
+          <li><a href="#about" @click.prevent="scrollTo('about')">關於豐盈</a></li>
+          <li><a href="#contact" class="nav-cta" @click.prevent="scrollTo('contact')">預約估價</a></li>
         </ul>
-        <button class="menu-toggle" @click="toggleMenu">
+
+        <!-- 手機版選單開關 -->
+        <button class="menu-toggle" :class="{ 'open': menuOpen }" @click="toggleMenu" aria-label="Menu">
           <span></span>
           <span></span>
           <span></span>
@@ -32,13 +41,25 @@ export default {
     const menuOpen = ref(false)
 
     const handleScroll = () => {
+      // 滾動超過 50px 才改變背景顏色
       isScrolled.value = window.scrollY > 50
     }
 
     const scrollTo = (id) => {
       const element = document.getElementById(id)
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
+        // 考量到固定導覽列的高度，加入 offset
+        const offset = 80;
+        const bodyRect = document.body.getBoundingClientRect().top;
+        const elementRect = element.getBoundingClientRect().top;
+        const elementPosition = elementRect - bodyRect;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+        
         menuOpen.value = false
       }
     }
@@ -71,101 +92,150 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
   z-index: 1000;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.2rem 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent; /* 初始透明 */
 }
 
+/* 滾動後的樣式 */
 .navbar.scrolled {
-  box-shadow: var(--shadow-lg);
+  background: rgba(44, 62, 80, 0.98); /* 使用 Hero 的深藍色 */
+  padding: 0.8rem 0;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .nav-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
 }
 
-.logo h2 {
-  color: var(--primary-color);
-  font-size: 1.5rem;
-  font-weight: 700;
+/* Logo 設計 */
+.logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo-main {
+  color: #f39c12; /* 品牌橙色 */
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.logo-sub {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+.experience-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #f39c12;
+  color: #f39c12;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* 選單樣式 */
 .nav-menu {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
 .nav-menu a {
   text-decoration: none;
-  color: var(--text-dark);
+  color: #fff;
   font-weight: 500;
-  transition: color 0.3s ease;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  padding: 5px 0;
   position: relative;
 }
 
-.nav-menu a:hover {
-  color: var(--secondary-color);
+.nav-menu a:not(.nav-cta):hover {
+  color: #f39c12;
 }
 
-.nav-menu a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--secondary-color);
-  transition: width 0.3s ease;
+/* 導覽列 CTA 按鈕（預約估價） */
+.nav-cta {
+  background: #f39c12;
+  padding: 8px 20px !important;
+  border-radius: 50px;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 10px rgba(243, 156, 18, 0.2);
 }
 
-.nav-menu a:hover::after {
-  width: 100%;
+.nav-cta:hover {
+  background: #e67e22;
+  transform: translateY(-2px);
 }
 
+/* 手機版開關動畫 */
 .menu-toggle {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 5px;
+  z-index: 1001;
 }
 
 .menu-toggle span {
-  width: 25px;
-  height: 3px;
-  background: var(--primary-color);
+  width: 28px;
+  height: 2px;
+  background: #fff;
   transition: all 0.3s ease;
 }
 
+.menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+@media (max-width: 992px) {
+  .nav-menu { gap: 1rem; }
+  .logo-main { font-size: 1.4rem; }
+}
+
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
+  .menu-toggle { display: flex; }
 
   .nav-menu {
     position: fixed;
-    top: 70px;
-    left: -100%;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 250px;
     flex-direction: column;
-    background: var(--white);
-    width: 100%;
-    padding: 2rem 0;
-    box-shadow: var(--shadow-lg);
-    transition: left 0.3s ease;
-    gap: 1.5rem;
+    justify-content: center;
+    background: #2c3e50;
+    transition: right 0.4s ease;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
   }
 
   .nav-menu.active {
-    left: 0;
+    right: 0;
+  }
+
+  .nav-menu a {
+    font-size: 1.2rem;
   }
 }
 </style>
