@@ -64,31 +64,7 @@
         </div>
       </div>
 
-      <!-- 4. 職人誠信經營 Banner (手機版自動垂直排列) -->
-      <div class="trust-cta-banner">
-        <div class="banner-inner">
-          <div class="banner-content">
-            <div class="title-group">
-              <span class="banner-badge">40年在地深耕</span>
-              <h3 class="banner-title">大北區翻新首選：職人誠信經營</h3>
-            </div>
-            <p class="banner-desc">
-              我們堅持「職人直營、透明報價」，絕非裝潢蟑螂。老屋的問題，交給四十年的老經驗最放心。
-            </p>
-            <div class="area-tags">
-              <span>📍 基隆</span><span>📍 新北</span><span>📍 桃園</span><span>📍 新竹</span>
-            </div>
-          </div>
 
-          <div class="banner-action">
-            <a href="#contact" class="btn-cta" @click.prevent="scrollTo('contact')">
-              <span class="btn-text">免費預約現場估價</span>
-              <i class="arrow-icon">→</i>
-            </a>
-          </div>
-        </div>
-        <div class="bg-shield-decor">🛡️</div>
-      </div>
 
       <!-- 5. Lightbox 大圖彈窗層 -->
       <transition name="fade">
