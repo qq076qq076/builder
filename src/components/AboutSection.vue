@@ -40,6 +40,8 @@
               <p class="card-desc">老屋的問題，交給四十年的老經驗最放心。我們在以下區域為您服務：</p>
               <div class="area-tags">
                 <span>📍 基隆</span>
+                <span>📍 宜蘭</span>
+                <span>📍 台北</span>
                 <span>📍 新北</span>
                 <span>📍 桃園</span>
                 <span>📍 新竹</span>
