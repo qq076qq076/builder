@@ -6,7 +6,7 @@
           <!-- 信任標籤 -->
           <div class="trust-badge">
             <span class="experience-tag">40年在地經驗</span>
-            <span class="integrity-tag">誠信經營 · 絕非裝潢蟑螂</span>
+            <span class="experience-tag">誠信經營 · 絕非裝潢蟑螂</span>
           </div>
 
           <h1 class="hero-title">
@@ -30,7 +30,7 @@
           </p>
 
           <div class="hero-buttons">
-            <a href="#contact" class="btn btn-primary" @click.prevent="scrollTo('contact')">預約免費現場估價</a>
+            <a href="#contact" class="btn btn-outline" @click.prevent="scrollTo('contact')">預約免費現場估價</a>
             <a href="#work" class="btn btn-outline" @click.prevent="scrollTo('work')">查看翻新案例</a>
           </div>
         </div>

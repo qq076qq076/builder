@@ -101,9 +101,9 @@ export default {
           description: '此案為老舊公寓全面翻新。工程包含水電管線全數更換、衛浴泥作重新打底防水、並施作客製化衣櫃與天花板。',
           tags: ['防水工程', '泥作隔間', '老屋翻新'],
           images: [
-            { url: '/img/462332.jpg', label: '完工照', type: 'after' },            
-            { url: '/img/462489_0.jpg', label: '施工中', type: 'before' },            
-            { url: '/img/462317_0.jpg', label: '原始屋況', type: 'detail' },   
+            { url: 'img/462332.jpg', label: '完工照', type: 'after' },            
+            { url: 'img/462489_0.jpg', label: '施工中', type: 'before' },            
+            { url: 'img/462317_0.jpg', label: '原始屋況', type: 'detail' },   
           ]
         },
         {
@@ -115,9 +115,9 @@ export default {
           description: '利用老師傅 40 年木作手藝，解決畸零空間收納問題。天花板採用輕鋼架配合造型收邊，隱藏老舊管線。',
           tags: ['系統衣櫃', '釘天花板', '木作裝潢'],
           images: [
-            { url: '/img/462333.jpg', label: '完工照', type: 'after' },            
-            { url: '/img/462498_0.jpg', label: '施工中', type: 'before' },            
-            { url: '/img/462322_0.jpg', label: '原始屋況', type: 'detail' },            
+            { url: 'img/462333.jpg', label: '完工照', type: 'after' },            
+            { url: 'img/462498_0.jpg', label: '施工中', type: 'before' },            
+            { url: 'img/462322_0.jpg', label: '原始屋況', type: 'detail' },            
           ]
         }
       ]
