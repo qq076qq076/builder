@@ -95,10 +95,10 @@ export default {
         {
           id: 1,
           type: '全屋翻新統包',
-          location: '新北板橋區',
+          location: '宜蘭市羅東鎮',
           activeIdx: 0,
           title: '30年公寓大改造：舊房變新房',
-          description: '此案為老舊公寓全面翻新。工程包含水電管線全數更換、衛浴泥作重新打底防水、並施作客製化衣櫃與天花板。',
+          description: '此案為老舊公寓全面翻新。工程包含水電管線全數更換、衛浴泥作重新打底防水、並施作客製化系統櫃與天花板。',
           tags: ['防水工程', '泥作隔間', '老屋翻新'],
           images: [
             { url: 'img/462332.jpg', label: '完工照', type: 'after' },            
@@ -111,9 +111,9 @@ export default {
           type: '木作/收納規劃',
           location: '桃園中壢區',
           activeIdx: 0,
-          title: '系統木作衣櫃與天花板美化',
+          title: '系統木作櫃與天花板美化',
           description: '利用老師傅 40 年木作手藝，解決畸零空間收納問題。天花板採用輕鋼架配合造型收邊，隱藏老舊管線。',
-          tags: ['系統衣櫃', '釘天花板', '木作裝潢'],
+          tags: ['系統櫃', '釘天花板', '木作裝潢'],
           images: [
             { url: 'img/462333.jpg', label: '完工照', type: 'after' },            
             { url: 'img/462498_0.jpg', label: '施工中', type: 'before' },            
