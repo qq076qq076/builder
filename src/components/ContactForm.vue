@@ -1,5 +1,8 @@
 <template>
-  <form class="contact-form" @submit.prevent="handleSubmit">
+  <form
+    class="contact-form"
+    @submit.prevent="handleSubmit"
+  >
     <div class="form-header">
       <h3>預約免費現場估價</h3>
       <p>40 年老宅翻新經驗，誠信經營，絕非裝潢蟑螂</p>
@@ -16,7 +19,10 @@
         :class="{ 'error': errors.name }"
         placeholder="請輸入姓名 (例如：王先生)"
       />
-      <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
+      <span
+        v-if="errors.name"
+        class="error-message"
+      >{{ errors.name }}</span>
     </div>
 
     <!-- 電話 -->
@@ -30,13 +36,21 @@
         :class="{ 'error': errors.phone }"
         placeholder="請輸入手機或市話"
       />
-      <span v-if="errors.phone" class="error-message">{{ errors.phone }}</span>
+      <span
+        v-if="errors.phone"
+        class="error-message"
+      >{{ errors.phone }}</span>
     </div>
 
     <!-- 地區選擇 (針對師傅想打北區的需求) -->
     <div class="form-group">
       <label for="area">房屋所在區域 *</label>
-      <select id="area" v-model="form.area" required :class="{ 'error': errors.area }">
+      <select
+        id="area"
+        v-model="form.area"
+        required
+        :class="{ 'error': errors.area }"
+      >
         <option value="">請選擇區域</option>
         <option value="基隆市">基隆市</option>
         <option value="台北市">台北市</option>
@@ -44,23 +58,34 @@
         <option value="桃園市">桃園市</option>
         <option value="新竹縣市">新竹縣市</option>
       </select>
-      <span v-if="errors.area" class="error-message">{{ errors.area }}</span>
+      <span
+        v-if="errors.area"
+        class="error-message"
+      >{{ errors.area }}</span>
     </div>
 
     <!-- 諮詢項目 -->
     <div class="form-group">
       <label for="subject">諮詢工程項目 *</label>
-      <select id="subject" v-model="form.subject" required :class="{ 'error': errors.subject }">
+      <select
+        id="subject"
+        v-model="form.subject"
+        required
+        :class="{ 'error': errors.subject }"
+      >
         <option value="">請選擇諮詢項目</option>
-        <option value="舊房變新房 (全屋翻新統包)">舊房變新房 (全屋翻新統包)</option>
-        <option value="水電管線重拉 / 防水工程">水電管線重拉 / 防水工程</option>
-        <option value="泥作工程 (砌磚抹牆、貼磁磚)">泥作工程 (砌磚抹牆、貼磁磚)</option>
-        <option value="木作裝修 (釘天花板、做衣櫃)">木作裝修 (釘天花板、做衣櫃)</option>
-        <option value="油漆粉刷 / 室內裝潢修繕">油漆粉刷 / 室內裝潢修繕</option>
+        <option value="舊房變新房">舊房變新房 (全屋翻新統包)</option>
+        <option value="防水工程">防水工程</option>
+        <option value="泥作工程">泥作工程 (砌磚抹牆、貼磁磚)</option>
+        <option value="木作裝修">木作裝修 (釘天花板、做衣櫃)</option>
+        <option value="室內裝潢修繕">油漆粉刷 / 室內裝潢修繕</option>
         <option value="現場估價預約">現場估價預約</option>
         <option value="其他工程諮詢">其他工程諮詢</option>
       </select>
-      <span v-if="errors.subject" class="error-message">{{ errors.subject }}</span>
+      <span
+        v-if="errors.subject"
+        class="error-message"
+      >{{ errors.subject }}</span>
     </div>
 
     <!-- 訊息內容 -->
@@ -74,14 +99,24 @@
         :class="{ 'error': errors.message }"
         placeholder="請簡單描述您的房屋狀況，例如：30年公寓、約25坪、需全屋翻新..."
       ></textarea>
-      <span v-if="errors.message" class="error-message">{{ errors.message }}</span>
+      <span
+        v-if="errors.message"
+        class="error-message"
+      >{{ errors.message }}</span>
     </div>
 
-    <button type="submit" class="btn-submit" :disabled="isSubmitting">
+    <button
+      type="submit"
+      class="btn-submit"
+      :disabled="isSubmitting"
+    >
       <i class="icon">📅</i> {{ isSubmitting ? '正在為您送出...' : '預約 40 年經驗師傅現場估價' }}
     </button>
 
-    <div v-if="submitSuccess" class="success-message">
+    <div
+      v-if="submitSuccess"
+      class="success-message"
+    >
       ✓ 訊息已成功送出！師傅會盡快致電與您聯繫。
     </div>
   </form>
@@ -105,18 +140,18 @@ export default {
     const errors = reactive({})
     const isSubmitting = ref(false)
     const submitSuccess = ref(false)
-    
+
     // Google Form 設定
     // 請將此 URL 替換為您的 Google Form 提交 URL
     // 取得方式：建立 Google Form → 右上角「傳送」→ 複製連結 → 將 /viewform 改為 /formResponse
     const GOOGLE_FORM_URL = import.meta.env.VITE_GOOGLE_FORM_URL || ''
-    
+
     // Google Form 欄位對應（entry.xxxxx 是 Google Form 的欄位 ID）
     // 取得方式：在表單 URL 後加上 ?usp=pp_url&entry.123456789=test 來測試，數字就是 entry ID
     const FORM_ENTRIES = {
       name: import.meta.env.VITE_GOOGLE_FORM_ENTRY_NAME || 'entry.123456789',
       phone: import.meta.env.VITE_GOOGLE_FORM_ENTRY_PHONE || 'entry.123456790',
-      email: import.meta.env.VITE_GOOGLE_FORM_ENTRY_EMAIL || 'entry.123456791',
+      area: import.meta.env.VITE_GOOGLE_FORM_ENTRY_AREA || 'entry.123456791',
       subject: import.meta.env.VITE_GOOGLE_FORM_ENTRY_SUBJECT || 'entry.123456792',
       message: import.meta.env.VITE_GOOGLE_FORM_ENTRY_MESSAGE || 'entry.123456793'
     }
@@ -126,7 +161,7 @@ export default {
       Object.keys(errors).forEach(key => delete errors[key])
 
       if (!form.name.trim()) errors.name = '請輸入聯絡人姓名'
-      
+
       // 驗證電話 (台灣手機或市話格式)
       const phoneRegex = /^(\d{2,3}-?\d{3,4}-?\d{4}|09\d{8})$/
       if (!form.phone.trim()) {
@@ -137,7 +172,7 @@ export default {
 
       if (!form.area) errors.area = '請選擇房屋所在區域'
       if (!form.subject) errors.subject = '請選擇諮詢項目'
-      
+
       if (!form.message.trim()) {
         errors.message = '請描述您的需求'
       } else if (form.message.trim().length < 5) {
@@ -171,7 +206,7 @@ export default {
         const fields = [
           { name: FORM_ENTRIES.name, value: form.name },
           { name: FORM_ENTRIES.phone, value: form.phone },
-          { name: FORM_ENTRIES.email, value: form.email },
+          { name: FORM_ENTRIES.area, value: form.area },
           { name: FORM_ENTRIES.subject, value: form.subject || '' },
           { name: FORM_ENTRIES.message, value: form.message }
         ]
@@ -217,12 +252,17 @@ export default {
 
       try {
         // 模擬發送 API 
-        await new Promise(resolve => setTimeout(resolve, 1500))
-        
+        if (GOOGLE_FORM_URL) {
+          // 提交到 Google Form
+          await submitToGoogleForm()
+        } else {
+          await new Promise(resolve => setTimeout(resolve, 1500))
+        }
+
         console.log('豐盈統包工程 - 收到新諮詢:', form)
-        
+
         submitSuccess.value = true
-        
+
         // 重置表單
         Object.keys(form).forEach(key => form[key] = '')
 
@@ -247,7 +287,8 @@ export default {
   padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  border-top: 5px solid #f39c12; /* 品牌橙色頂邊 */
+  border-top: 5px solid #f39c12;
+  /* 品牌橙色頂邊 */
 }
 
 .form-header {

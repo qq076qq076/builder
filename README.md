@@ -97,6 +97,32 @@ VITE_GOOGLE_FORM_ENTRY_MESSAGE=entry.123456793
 
 如果未設定 Google Form URL，表單會使用模擬提交模式（僅在控制台顯示資料）。
 
+## 分享預覽（FB、LINE、IG 等）
+
+連結分享到 Facebook、LINE、Instagram 等平台時，會顯示標題、描述與預覽圖。
+
+### 設定步驟
+
+1. **設定網站網址**  
+   在 `.env` 加入正式網址（建置時會寫入 HTML meta）：
+   ```env
+   VITE_SITE_URL=https://您的帳號.github.io/builder
+   ```
+   若使用自訂網域：`VITE_SITE_URL=https://您的網域.com`
+
+2. **預覽圖片**  
+   預設使用 `public/img/og-image.jpg`（已複製自現有圖片）。  
+   建議自訂一張 **1200×630** 的圖片並覆蓋 `public/img/og-image.jpg`，以獲得較佳預覽效果。
+
+3. **建置後檢查**  
+   執行 `npm run build` 後，在 `dist/index.html` 中確認 `og:image`、`og:url` 等已變成完整網址。
+
+### 驗證預覽
+
+- **Facebook**：[分享偵錯工具](https://developers.facebook.com/tools/debug/)
+- **LINE**：直接貼連結到聊天室查看預覽
+- **Twitter**：[Card Validator](https://cards-dev.twitter.com/validator)
+
 ## 部署到 GitHub Pages
 
 ### 方式一：使用 GitHub Actions（推薦）
@@ -105,7 +131,7 @@ VITE_GOOGLE_FORM_ENTRY_MESSAGE=entry.123456793
 2. 在 GitHub 倉庫設定中啟用 Pages：
    - 進入 Settings → Pages
    - Source 選擇 "GitHub Actions"
-3. 每次推送到 `main` 分支會自動部署
+3. 每次推送到 `main` 分支會自動部署（分享預覽用的網址會在建置時自動帶入）。
 
 **注意**：如果您的倉庫名稱不是 `builder`，請修改 `vite.config.js` 中的 `base` 路徑：
 ```javascript
