@@ -27,7 +27,7 @@
             <!-- 左側：圖片區 -->
             <div class="portfolio-gallery">
               <div class="main-image-container" @click="openLightbox(item.images[item.activeIdx].url)">
-                <img :src="item.images[item.activeIdx].url" :alt="item.title" class="main-image clickable">
+                <img :src="item.images[item.activeIdx].url" :alt="`${item.location}${item.title} - 豐盈老屋翻新工程`" class="main-image clickable">
                 <div class="image-label" :class="item.images[item.activeIdx].type">
                   {{ item.images[item.activeIdx].label }}
                 </div>
