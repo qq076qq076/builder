@@ -101,20 +101,25 @@ export default {
           description: '此案為老舊公寓全面翻新。工程包含水電管線全數更換、衛浴泥作重新打底防水、並施作客製化系統櫃與天花板。',
           tags: ['防水工程', '泥作隔間', '老屋翻新'],
           images: [
-            { url: 'img/462332.jpg', label: '完工照', type: 'after' },            
-            { url: 'img/462489_0.jpg', label: '施工中', type: 'before' },            
+            { url: 'img/467095_0.jpg', label: '完工照', type: 'after' },            
+            { url: 'img/467096_0.jpg', label: '完工照', type: 'after' },            
+            { url: 'img/467093_0.jpg', label: '完工照', type: 'after' },            
+            { url: 'img/467098_0.jpg', label: '完工照', type: 'after' },            
+            { url: 'img/462489_0.jpg', label: '施工中', type: 'before' },     
+            { url: 'img/462497_0.jpg', label: '施工中', type: 'before' },            
             { url: 'img/462317_0.jpg', label: '原始屋況', type: 'detail' },   
           ]
         },
         {
           id: 2,
           type: '木作/收納規劃',
-          location: '桃園中壢區', '新竹山區',
+          location: '桃園中壢區',
           activeIdx: 0,
           title: '系統木作櫃與天花板美化',
           description: '展現老師傅 40 年紮實木作手藝，現場精準釘製木作角料骨架。相比一般輕鋼架，木作天花板更能完美契合老屋的畸零空間與大樑，搭配平頂施工隱藏老舊管線，展現最細膩的裝修功力。',
           tags: ['系統櫃', '釘天花板', '木作裝潢','藝術燈光'],
           images: [
+            { url: 'img/462332.jpg', label: '完工照', type: 'after' },           
             { url: 'img/462333.jpg', label: '完工照', type: 'after' },
             { url: 'img/92250_0.jpg', label: '完工照', type: 'after' },            
             { url: 'img/92252_0.jpg', label: '完工照', type: 'after' },            
