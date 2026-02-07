@@ -182,65 +182,29 @@ export default {
       return Object.keys(errors).length === 0
     }
 
-    const submitToGoogleForm = () => {
-      return new Promise((resolve, reject) => {
-        if (!GOOGLE_FORM_URL) {
-          reject(new Error('未設定 Google Form URL'))
-          return
-        }
+    const submitToGoogleForm = async () => {
+      if (!GOOGLE_FORM_URL) {
+        throw new Error('未設定 Google Form URL')
+      }
 
-        // 建立隱藏 iframe 來提交表單
-        const iframe = document.createElement('iframe')
-        iframe.style.display = 'none'
-        iframe.name = 'hidden_iframe'
-        document.body.appendChild(iframe)
+      // 使用 URLSearchParams 組合 Google Form 需要的欄位格式
+      const formData = new URLSearchParams()
+      formData.append(FORM_ENTRIES.name, form.name)
+      formData.append(FORM_ENTRIES.phone, form.phone)
+      formData.append(FORM_ENTRIES.area, form.area)
+      formData.append(FORM_ENTRIES.subject, form.subject || '')
+      formData.append(FORM_ENTRIES.message, form.message)
 
-        // 建立隱藏表單
-        const hiddenForm = document.createElement('form')
-        hiddenForm.method = 'POST'
-        hiddenForm.action = GOOGLE_FORM_URL
-        hiddenForm.target = 'hidden_iframe'
-        hiddenForm.style.display = 'none'
-
-        // 建立表單欄位
-        const fields = [
-          { name: FORM_ENTRIES.name, value: form.name },
-          { name: FORM_ENTRIES.phone, value: form.phone },
-          { name: FORM_ENTRIES.area, value: form.area },
-          { name: FORM_ENTRIES.subject, value: form.subject || '' },
-          { name: FORM_ENTRIES.message, value: form.message }
-        ]
-
-        fields.forEach(field => {
-          const input = document.createElement('input')
-          input.type = 'hidden'
-          input.name = field.name
-          input.value = field.value
-          hiddenForm.appendChild(input)
-        })
-
-        document.body.appendChild(hiddenForm)
-
-        // 監聽 iframe 載入完成
-        iframe.onload = () => {
-          setTimeout(() => {
-            document.body.removeChild(iframe)
-            document.body.removeChild(hiddenForm)
-            resolve()
-          }, 1000)
-        }
-
-        // 提交表單
-        hiddenForm.submit()
-
-        // 設定超時處理
-        setTimeout(() => {
-          if (document.body.contains(iframe)) {
-            document.body.removeChild(iframe)
-            document.body.removeChild(hiddenForm)
-            resolve() // 即使超時也視為成功（Google Forms 可能不會回傳）
-          }
-        }, 3000)
+      // 使用 fetch + no-cors 送出
+      // Google Forms 跨域不會回傳可讀的 response，
+      // 但 no-cors 模式能保證請求確實送達 Google 伺服器
+      await fetch(GOOGLE_FORM_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
       })
     }
 
